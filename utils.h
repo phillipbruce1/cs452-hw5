@@ -1,8 +1,6 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-// TODO: write this stuff bc it's not compiling without it
-
 extern void *mmalloc(size_t size);
 
 extern unsigned int e2size(int e);

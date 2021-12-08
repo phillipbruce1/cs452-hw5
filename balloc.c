@@ -7,6 +7,14 @@
 #include "bitmap.h"
 #include "utils.h"
 
+typedef struct BallocContainer {
+    FreeList *f;
+    int u;
+    int l;
+    int size;
+    void *base;
+} *BallocContainer;
+
 static const size_t MAX_SIZE = 128;
 
 /**
@@ -18,7 +26,7 @@ static const size_t MAX_SIZE = 128;
  * @return Balloc 
  */
 extern Balloc bnew(unsigned int size, int l, int u) {
-    return (Balloc*) mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    return (Balloc*) mmalloc(size);
 }
 
 /**
