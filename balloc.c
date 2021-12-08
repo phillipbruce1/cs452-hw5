@@ -7,16 +7,18 @@
 #include "bitmap.h"
 #include "utils.h"
 
+static const size_t MAX_SIZE = 128;
+
 /**
  * @brief - Allocated a new buddy system
  * 
  * @param size 
- * @param l 
- * @param u 
+ * @param l - Lower bound for memory range
+ * @param u - Upper bound for memory range
  * @return Balloc 
  */
 extern Balloc bnew(unsigned int size, int l, int u) {
-    return mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    return (Balloc*) mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 }
 
 /**
@@ -27,6 +29,9 @@ extern Balloc bnew(unsigned int size, int l, int u) {
  * @return void* - Pointer to memory allocated in pool
  */
 extern void *balloc(Balloc pool, unsigned int size) {
+    // if request is too big, return null
+    if (size > MAX_SIZE)
+        ERROR("Invalid balloc size requested");
 }
 
 /**
@@ -36,6 +41,7 @@ extern void *balloc(Balloc pool, unsigned int size) {
  * @param mem 
  */
 extern void bfree(Balloc pool, void *mem) {
+    //munmap? To unmap the region used up in the mmap() call?
 }
 
 /**
