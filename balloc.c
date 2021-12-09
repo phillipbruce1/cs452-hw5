@@ -109,5 +109,5 @@ extern void bprint(Balloc pool) {
     if (pool == NULL)
         ERROR("pool is null");
     BallocContainer *b = (BallocContainer *) pool;
-    freelistprint(b->f, b->size, b->l, b->u);
+    printf("%p\n", b->base);
 }
